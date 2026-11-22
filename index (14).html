@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#070917" />
+  <meta name="description" content="Town is your corner of the internet. Meet people, make friends, and stay a while. Join us on Discord." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Town — Your corner of the internet." />
+  <meta property="og:description" content="Meet people. Make friends. Stay a while. Join Town on Discord." />
+  <meta property="og:image" content="social-card.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <title>Town — Your corner of the internet.</title>
+  <style>
+    :root { color-scheme:dark; --ink:#070917; --white:#f8faff; --muted:#a5abc3; --cyan:#56dfff; --purple:#aa72fb; }
+    *,*::before,*::after { box-sizing:border-box; }
+    html { background:var(--ink); min-width:320px; }
+    body { min-width:320px; margin:0; background:var(--ink); color:var(--white); font-family:'DM Sans',system-ui,-apple-system,sans-serif; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+    a { color:inherit; text-decoration:none; }
+    a:focus-visible { outline:2px solid #a8eaff; outline-offset:5px; }
+    ::selection { background:#b6d1ff; color:#081020; }
+    .scene { position:relative; isolation:isolate; display:grid; place-items:center; min-height:100vh; min-height:100svh; overflow:hidden;
+      background:
+        radial-gradient(ellipse 58% 52% at 51% 43%, rgba(19,27,68,.70) 0%, rgba(9,13,36,.32) 60%, rgba(9,13,36,0) 100%),
+        linear-gradient(132deg,#050914 0%,#080a19 47%,#0b091d 72%,#050713 100%);
+    }
+    /* All smooth CSS gradients; no raster noise, blur filters or frosted overlays. */
+    .ambient { position:absolute; inset:-14%; z-index:-3; pointer-events:none; background:
+      radial-gradient(ellipse 38% 43% at 23% 44%,rgba(0,115,234,.20) 0%,rgba(9,81,200,.07) 49%,transparent 81%),
+      radial-gradient(ellipse 40% 43% at 78% 50%,rgba(118,52,236,.18) 0%,rgba(100,34,202,.065) 51%,transparent 83%),
+      radial-gradient(ellipse 32% 27% at 50% 41%,rgba(53,76,191,.10),transparent 80%);
+      animation:ambient-drift 18s ease-in-out infinite alternate; transform-origin:center;
+    }
+    .ambient-secondary { position:absolute; z-index:-2; inset:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 27% 33% at 28% 71%,rgba(12,91,177,.07),transparent 100%),
+        radial-gradient(ellipse 31% 39% at 73% 25%,rgba(106,39,173,.09),transparent 100%);
+      animation:ambient-drift-two 22s ease-in-out infinite alternate;
+    }
+    .paths { position:absolute; z-index:-1; width:min(1200px,130vw); aspect-ratio:1100/600; left:50%; top:43%; pointer-events:none; transform:translate(-50%,-50%); opacity:.62; }
+    .paths svg { display:block; width:100%; height:100%; overflow:visible; }
+    .path-a { animation:path-a 13s ease-in-out infinite alternate; }
+    .path-b { animation:path-b 17s ease-in-out infinite alternate; }
+    .light-crease { animation:crease 8s ease-in-out infinite alternate; }
+    .vignette { position:absolute; inset:0; z-index:-1; pointer-events:none; background:radial-gradient(ellipse 86% 92% at 50% 47%,transparent 25%,rgba(3,5,16,.22) 78%,rgba(3,5,14,.57) 100%); }
+    main { width:100%; display:grid; place-items:center; min-height:100vh; min-height:100svh; padding:38px 18px 42px; position:relative; z-index:1; }
+    .hero { display:flex; align-items:center; flex-direction:column; text-align:center; width:min(100%,720px); }
+    .logo-stage { width:clamp(200px,21vw,268px); aspect-ratio:1; position:relative; display:grid; place-items:center; margin-bottom:-10px; }
+    .logo-stage::before { content:''; position:absolute; inset:-14%; z-index:0; border-radius:50%; pointer-events:none;
+      background:radial-gradient(circle,rgba(53,91,226,.19) 0%,rgba(30,85,183,.08) 33%,rgba(102,43,199,.07) 50%,transparent 72%);
+      animation:logo-aura 7s ease-in-out infinite alternate;
+    }
+    .logo-float { position:relative; z-index:1; width:100%; height:100%; animation:float 5.8s ease-in-out infinite; will-change:transform; }
+    .logo-float img { display:block; width:100%; height:100%; object-fit:contain; image-rendering:auto; filter:drop-shadow(0 16px 23px rgba(2,4,25,.34)); }
+    /* Single, uninterrupted wordmark. The period is real text, not a positioned element. */
+    h1 { margin:3px 0 0; padding:0; white-space:nowrap; color:#fbfcff; font:800 clamp(94px,11.6vw,145px)/.98 'Outfit','DM Sans',sans-serif; letter-spacing:-.095em; }
+    .tagline { margin:25px 0 0; font:600 clamp(20px,2.2vw,26px)/1.3 'Outfit',sans-serif; letter-spacing:-.035em; color:#f1f3ff; }
+    .subline { margin:9px 0 0; font-size:clamp(14px,1.25vw,16px); line-height:1.55; font-weight:400; letter-spacing:-.01em; color:#aeb5d0; }
+    .button-wrap { margin-top:34px; }
+    .join { display:flex; align-items:center; justify-content:center; gap:13px; width:260px; min-height:61px; padding:0 18px; position:relative; overflow:hidden;
+      border:1px solid rgba(221,232,255,.30); border-radius:16px;
+      background:linear-gradient(108deg,#238edb 0%,#477be5 34%,#745ee2 67%,#9349d5 100%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.29),0 12px 34px rgba(45,65,209,.20),0 0 0 5px rgba(76,98,237,.038);
+      font:700 16px/1 'Outfit',sans-serif; color:#fff; letter-spacing:-.01em;
+      transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease;
+    }
+    .join::before { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(112deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%); transform:translateX(-150%); transition:transform .75s ease; }
+    .join:hover { transform:translateY(-3px); border-color:rgba(240,245,255,.55); box-shadow:inset 0 1px 0 rgba(255,255,255,.38),0 14px 41px rgba(55,78,222,.32),0 0 0 6px rgba(76,98,237,.075); }
+    .join:hover::before { transform:translateX(150%); }
+    .join:active { transform:translateY(0) scale(.985); }
+    .join svg.discord { width:23px; height:23px; fill:currentColor; flex:none; }
+    .join svg.arrow { width:17px; height:17px; flex:none; margin-left:13px; transition:transform .24s ease; }
+    .join:hover svg.arrow { transform:translate(3px,-3px); }
+    .microcopy { margin:16px 0 0; font:500 12px/1.5 'DM Sans',sans-serif; letter-spacing:.015em; color:#7d87a8; }
+    .microcopy .dot { display:inline-block; width:3px;height:3px; background:#7d87a8; border-radius:50%; margin:0 8px 3px; }
+    .enter { animation:enter .75s cubic-bezier(.2,.78,.2,1) both; }
+    .logo-stage.enter { animation-delay:.02s; }
+    h1.enter { animation-delay:.10s; }
+    .tagline.enter { animation-delay:.17s; }
+    .subline.enter { animation-delay:.22s; }
+    .button-wrap.enter { animation-delay:.29s; }
+    .microcopy.enter { animation-delay:.36s; }
+    @keyframes enter { from { opacity:0; translate:0 13px; } to { opacity:1; translate:0 0; } }
+    @keyframes float { 0%,100% { transform:translate3d(0,4px,0) rotate(-.7deg); } 50% { transform:translate3d(0,-12px,0) rotate(.7deg); } }
+    @keyframes logo-aura { from { opacity:.65; transform:scale(.91); } to { opacity:1; transform:scale(1.12); } }
+    @keyframes ambient-drift { from { transform:translate(-2%,-1%) scale(1); } to { transform:translate(2%,1%) scale(1.07); } }
+    @keyframes ambient-drift-two { from { transform:translate(1%,2%); } to { transform:translate(-1%,-2%); } }
+    @keyframes path-a { from { transform:translateY(-10px);opacity:.55; } to { transform:translateY(12px);opacity:.95; } }
+    @keyframes path-b { from { transform:translateY(10px);opacity:.85; } to { transform:translateY(-8px);opacity:.55; } }
+    @keyframes crease { from { opacity:.05; } to { opacity:.5; } }
+    @media(max-width:700px) {
+      .ambient { background:
+        radial-gradient(ellipse 52% 35% at 11% 48%,rgba(0,117,233,.18),transparent 89%),
+        radial-gradient(ellipse 55% 40% at 93% 45%,rgba(112,37,214,.17),transparent 91%),
+        radial-gradient(ellipse 52% 34% at 52% 38%,rgba(36,51,142,.15),transparent 91%); }
+      .paths { width:205vw; top:42%; opacity:.43; }
+      .logo-stage { width:195px; margin-bottom:-6px; }
+      h1 { font-size:clamp(91px,24vw,114px); }
+      .tagline { margin-top:23px; font-size:21px; }
+      .subline { font-size:14px; }
+      .button-wrap { margin-top:29px; }
+      .join { width:255px; min-height:60px; }
+      .microcopy { margin-top:15px; }
+    }
+    @media(max-width:360px) { .logo-stage { width:169px; } h1 { font-size:88px; } .tagline { font-size:19px; } .join { width:247px; } }
+    @media(max-height:720px) {
+      main { padding:15px 14px; }
+      .logo-stage { width:150px; margin-bottom:-5px; }
+      h1 { font-size:clamp(82px,11vw,112px); }
+      .tagline { margin-top:17px; font-size:20px; }
+      .subline { margin-top:6px; }
+      .button-wrap { margin-top:22px; }
+      .join { min-height:54px; }
+      .microcopy { margin-top:12px; }
+    }
+    @media(max-width:700px) and (max-height:640px) {
+      .logo-stage { width:132px; }
+      h1 { font-size:clamp(78px,23vw,97px); }
+      .tagline { margin-top:12px; font-size:18px; }
+      .subline { font-size:13px; }
+      .button-wrap { margin-top:17px; }
+      .join { min-height:52px; }
+    }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; } .enter { opacity:1!important; translate:0 0!important; } }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="ambient-secondary" aria-hidden="true"></div>
+    <div class="paths" aria-hidden="true">
+      <svg viewBox="0 0 1100 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="p1" x1="58" y1="230" x2="1071" y2="350" gradientUnits="userSpaceOnUse"><stop stop-color="#23C8FF" stop-opacity="0"/><stop offset=".24" stop-color="#23C8FF" stop-opacity=".29"/><stop offset=".50" stop-color="#6C92FF" stop-opacity=".10"/><stop offset=".77" stop-color="#B36BFF" stop-opacity=".33"/><stop offset="1" stop-color="#B36BFF" stop-opacity="0"/></linearGradient>
+          <linearGradient id="p2" x1="50" y1="430" x2="1050" y2="300" gradientUnits="userSpaceOnUse"><stop stop-color="#21DBFF" stop-opacity="0"/><stop offset=".26" stop-color="#21DBFF" stop-opacity=".29"/><stop offset=".59" stop-color="#7181FD" stop-opacity=".08"/><stop offset=".79" stop-color="#AE69F9" stop-opacity=".31"/><stop offset="1" stop-color="#AE69F9" stop-opacity="0"/></linearGradient>
+          <linearGradient id="p3" x1="250" y1="280" x2="760" y2="360" gradientUnits="userSpaceOnUse"><stop stop-color="#7DE8FF" stop-opacity="0"/><stop offset=".52" stop-color="#7DE8FF" stop-opacity=".31"/><stop offset="1" stop-color="#B280FF" stop-opacity="0"/></linearGradient>
+        </defs>
+        <path class="path-a" d="M 45 308 C 245 125 382 152 551 272 S 904 368 1060 170" stroke="url(#p1)" stroke-width="1.1"/>
+        <path class="path-b" d="M 52 426 C 230 534 402 493 575 357 S 904 243 1059 412" stroke="url(#p2)" stroke-width="1.2"/>
+        <path class="light-crease" d="M 225 265 C 340 185 449 200 560 275" stroke="url(#p3)" stroke-width=".9"/>
+      </svg>
+    </div>
+    <div class="vignette" aria-hidden="true"></div>
+    <main>
+      <section class="hero" aria-label="Welcome to Town">
+        <div class="logo-stage enter"><div class="logo-float"><img src="town-logo.png" alt="Town logo: blue and purple diamond with a glowing white T" width="768" height="768" fetchpriority="high" /></div></div>
+        <h1 class="enter">town.</h1>
+        <p class="tagline enter">Your corner of the internet.</p>
+        <p class="subline enter">Meet people. Make friends. Stay a while.</p>
+        <div class="button-wrap enter">
+          <a class="join" href="https://discord.gg/YK6KEjmAcb" target="_blank" rel="noopener noreferrer" aria-label="Join Town on Discord (opens in a new tab)">
+            <svg class="discord" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M104.4 8.6A99 99 0 0 0 80.2 1a70.4 70.4 0 0 0-3.1 6.4 93 93 0 0 0-27.1 0A68.7 68.7 0 0 0 46.9 1a99.9 99.9 0 0 0-24.2 7.6C7.4 31.1 3.3 53.1 5.4 74.7A99.6 99.6 0 0 0 35 89.6c2.4-3.3 4.5-6.9 6.3-10.6a63.3 63.3 0 0 1-9.9-4.7c.8-.6 1.6-1.2 2.4-1.9 19.1 8.9 40 8.9 59 0 .8.7 1.6 1.3 2.4 1.9a63.4 63.4 0 0 1-10 4.7c1.8 3.7 3.9 7.3 6.3 10.6A99 99 0 0 0 120 74.7c2.5-25-4.3-46.8-15.6-66.1ZM42.4 61.4c-5.7 0-10.4-5.2-10.4-11.7S36.6 38 42.4 38c5.8 0 10.5 5.2 10.4 11.7 0 6.5-4.6 11.7-10.4 11.7Zm42.4 0c-5.8 0-10.4-5.2-10.4-11.7S79 38 84.8 38s10.5 5.2 10.4 11.7c0 6.5-4.6 11.7-10.4 11.7Z"/></svg>
+            <span>Join Town</span>
+            <svg class="arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M6 5h9v9"/></svg>
+          </a>
+        </div>
+        <p class="microcopy enter">Free to join <span class="dot" aria-hidden="true"></span> Opens Discord</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
